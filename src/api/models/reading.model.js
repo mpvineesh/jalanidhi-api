@@ -12,6 +12,7 @@ const { env, jwtSecret, jwtExpirationInterval } = require('../../config/vars');
  * reading Schema
  * @private
  */
+const status = ['Paid', 'Pending'];
 const readingSchema = new mongoose.Schema({
   userId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -25,6 +26,11 @@ const readingSchema = new mongoose.Schema({
   charge: {
     type: Number,
     required: false,
+  },
+  paymentStatus: {
+    type: String,
+    enum: status,
+    default: 'Pending'
   },
   month: {
     type: String,
