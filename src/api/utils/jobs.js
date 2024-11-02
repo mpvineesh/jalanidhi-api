@@ -298,6 +298,7 @@ exports.createAdminUser = async function(){
     if(exist == null){
       let user = new User({
         name: 'Admin',
+        role: 'admin',
         mobile: '9090909090',
       });
       try {

@@ -77,24 +77,6 @@ const userSchema = new mongoose.Schema({
  * - virtuals
  */
 
-userSchema.virtual('tracking', {
-  ref: 'Tracking',
-  localField: '_id',
-  foreignField: 'refId',
-  justOne: true
-});
-
- userSchema.virtual('orderCount', {
-  ref: 'Order',
-  localField: '_id',
-  foreignField: 'customerId',
-  options: {
-    match: {
-      status: {'$nin': ['PendingPayment', 'PaymentFailed']}
-    }
-  },
-  count: true
-});
 
 userSchema.pre('save', async function save(next) {
   try {
@@ -118,7 +100,7 @@ userSchema.pre('save', async function save(next) {
 userSchema.method({
   transform() {
     const transformed = {};
-    const fields = ['id', 'name', 'email', 'picture', 'role', 'createdAt', 'address', 'mobile', 'walletCredits', 'referralCode', 'orderCount', 'tracking'];
+    const fields = ['id', 'name', 'picture', 'role', 'createdAt', 'address', 'mobile', ];
     
     fields.forEach((field) => {
       transformed[field] = this[field];

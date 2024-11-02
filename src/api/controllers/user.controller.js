@@ -50,9 +50,8 @@ exports.create = async (req, res, next) => {
       //check if referral code exists
       
       const user = await new User(req.body).save();
-      logger.info('Created new user: '+ JSON.stringify(req.body))
+      //logger.info('Created new user: '+ JSON.stringify(req.body))
        
-
       res.status(httpStatus.CREATED);
       res.json(user.transform());
   }
