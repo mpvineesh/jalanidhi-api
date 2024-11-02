@@ -39,10 +39,10 @@ exports.loggedIn = (req, res) => res.json(req.user.transform());
  */
 exports.create = async (req, res, next) => {
   try {
-    const exist = await User.findOne({'$or': [{mobile: req.body.mobile}]});
+    const exist = await User.findOne({mobile: req.body.mobile});
     if(exist) {
       let e = new APIError({
-        message: 'User with samemobile exist',
+        message: 'User with same mobile exist',
         status: httpStatus.CONFLICT,
       });
       next(e)
@@ -57,6 +57,7 @@ exports.create = async (req, res, next) => {
       res.json(user.transform());
   }
   } catch (error) {
+    console.log(error);
     next(User.checkDuplicateEmail(error));
   }
 };
