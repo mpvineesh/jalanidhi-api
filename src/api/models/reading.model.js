@@ -13,6 +13,11 @@ const { env, jwtSecret, jwtExpirationInterval } = require('../../config/vars');
  * @private
  */
 const readingSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
   value: {
     type: Number,
     required: true,
