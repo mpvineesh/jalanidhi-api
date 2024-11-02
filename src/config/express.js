@@ -37,9 +37,11 @@ app.use(methodOverride());
 app.use(helmet());
 
 // enable CORS - Cross Origin Resource Sharing
-app.use(cors({
-    origin: '*'
-}));
+// app.use(cors({
+//     origin: '*'
+// }));
+
+app.use(cors());
 
 // enable authentication
 app.use(passport.initialize());
