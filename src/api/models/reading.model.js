@@ -51,13 +51,21 @@ readingSchema.pre('save', async function save(next) {
 });
 
 
+readingSchema.virtual('user', {
+  ref: 'User',
+  localField: 'userId',
+  foreignField: '_id',
+  justOne: true
+});
+
+
 /**
  * Methods
  */
 readingSchema.method({
   transform() {
     const transformed = {};
-    const fields = ['createdAt', 'value', 'charge', 'month'];
+    const fields = ['createdAt', 'value', 'charge', 'month', 'user'];
 
     fields.forEach((field) => {
       transformed[field] = this[field];
@@ -109,7 +117,7 @@ readingSchema.statics = {
   }) {
     const options = omitBy({ name, email, role }, isNil);
 
-    return this.find(options)
+    return this.find(options).populate('user')
       .sort({ createdAt: -1 })
       .skip(perPage * (page - 1))
       .limit(perPage)
