@@ -19,10 +19,10 @@ module.exports = {
   // POST /v1/users
   createUser: {
     body: {
-      email: Joi.string().email().required(),
       mobile: Joi.number().required(),
       name: Joi.string().max(128),
-      role: Joi.string().valid(User.roles),
+      meterNo: Joi.string().max(128),
+      houseNo: Joi.string().max(128),
       address: Joi.array().items({
         apartment: Joi.string().required(),
         tower: Joi.string().required(),

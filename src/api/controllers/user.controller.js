@@ -39,57 +39,19 @@ exports.loggedIn = (req, res) => res.json(req.user.transform());
  */
 exports.create = async (req, res, next) => {
   try {
-    const exist = await User.findOne({'$or': [{email: req.body.email},{mobile: req.body.mobile}]});
+    const exist = await User.findOne({'$or': [{mobile: req.body.mobile}]});
     if(exist) {
       let e = new APIError({
-        message: 'User with same email/mobile exist',
+        message: 'User with samemobile exist',
         status: httpStatus.CONFLICT,
       });
       next(e)
     } else {
       //check if referral code exists
-      const settings = await Settings.findOne();
-      let referralCredits = settings.referralCredits ? settings.referralCredits : 0;
-      const referralCode = req.body.referralCode ? req.body.referralCode : '';
-      if(req.body['referralCode']){
-            
-        let referredBy = await User.findOne({'referralCode': req.body['referralCode']});
-        if(referredBy == null){
-          throw new APIError({
-            status: httpStatus.CONFLICT,
-            message: 'Invalid referral Code'
-          });
-        }
-        delete req.body['referralCode'];
-        req.body['referredBy']  = referredBy._id;
-        req.body['walletCredits']  = referralCredits;
-        //console.log('req.body', req.body)
-         
-      }
-
-      req.body['referralCode'] = appUtils.generateUniqueCode();
-      
-      let userCount = await User.countDocuments();
-      let fullName = req.body.name;
-      fullName = fullName.replace(/\s/g, '')
-      let nameStr = fullName.length > 3 ? fullName.substring(0, 4).toUpperCase() : fullName.toUpperCase();
-      const customerId = 'CBNC_' + nameStr+'_'+(userCount+1);
-      req.body['customerId'] = customerId;
       
       const user = await new User(req.body).save();
       logger.info('Created new user: '+ JSON.stringify(req.body))
-      if(referralCode){
-        let txn = {
-          userId: user._id,
-          credits: referralCredits,
-          type: "Referral",
-          txnDetails: {
-            //referredBy: referredBy._id,
-            comment: "Refferral rewards received",
-          },
-        };
-        await new WalletLogs(txn).save();
-      }
+       
 
       res.status(httpStatus.CREATED);
       res.json(user.transform());
