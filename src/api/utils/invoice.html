@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <mate charest="utf-8" />
+    <title>Hello world!</title>
+    <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: #333b3f;
+            font-family: 'Open Sans', sans-serif;
+            margin: 8px 0;
+            font-weight: 400;
+        }
+
+        .container-fluid {
+            padding-right: 10px;
+            padding-left: 10px;
+            margin-right: auto;
+            margin-left: auto;
+            
+        }
+
+        .row {
+
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+
+        .col-md-12 {
+            width: 100%;
+            padding-left: 10px;
+            padding-right: 10px;
+            box-sizing: border-box;
+
+        }
+
+        .white-box {
+            background: #fff !important;
+            padding: 15px 10px !important;
+            margin-bottom: 20px !important;
+            border: 1px solid #e5ebec !important;
+            border-radius: 4px !important;
+        }
+
+        h3 {
+            line-height: 18px;
+            font-size: 14px;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            text-decoration: none;
+            font-size: 10px;
+            margin: 0;
+        }
+
+        .pull-right {
+            float: right;
+        }
+
+        .pull-left {
+            float: left;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        address {
+            margin-bottom: 16px;
+            font-style: normal;
+            line-height: 1.42857143;
+        }
+
+        h5 {
+            line-height: 16px;
+            font-size: 14px;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        b {
+            font-weight: 600;
+        }
+
+        hr {
+            margin-top: 16px;
+            margin-bottom: 20px;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .text-muted {
+            color: #5D5D5D !important;
+        }
+
+        .m-l-30 {
+            margin-left: 30px !important;
+        }
+
+        .m-t-30 {
+            margin-top: 20px !important;
+        }
+
+        .btn-group-vertical>.btn-group:after,
+        .btn-toolbar:after,
+        .clearfix:after,
+        .container-fluid:after,
+        .container:after,
+        .dl-horizontal dd:after,
+        .form-horizontal .form-group:after,
+        .modal-footer:after,
+        .modal-header:after,
+        .nav:after,
+        .navbar-collapse:after,
+        .navbar-header:after,
+        .navbar:after,
+        .pager:after,
+        .panel-body:after,
+        .row:after {
+            clear: both;
+        }
+
+        .btn-group-vertical>.btn-group:after,
+        .btn-group-vertical>.btn-group:before,
+        .btn-toolbar:after,
+        .btn-toolbar:before,
+        .clearfix:after,
+        .clearfix:before,
+        .container-fluid:after,
+        .container-fluid:before,
+        .container:after,
+        .container:before,
+        .dl-horizontal dd:after,
+        .dl-horizontal dd:before,
+        .form-horizontal .form-group:after,
+        .form-horizontal .form-group:before,
+        .modal-footer:after,
+        .modal-footer:before,
+        .modal-header:after,
+        .modal-header:before,
+        .nav:after,
+        .nav:before,
+        .navbar-collapse:after,
+        .navbar-collapse:before,
+        .navbar-header:after,
+        .navbar-header:before,
+        .navbar:after,
+        .navbar:before,
+        .pager:after,
+        .pager:before,
+        .panel-body:after,
+        .panel-body:before,
+        .row:after,
+        .row:before {
+            display: table;
+            content: " ";
+        }
+
+        th {
+            color: #333b3f;
+            font-weight: 600;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        td,
+        th {
+            padding: 0;
+        }
+
+        .table-bordered {
+            border: 1px solid #e5ebec;
+        }
+
+        .table-responsive {
+            overflow-y: hidden;
+        }
+
+        .m-t-40 {
+            margin-top: 30px !important;
+        }
+
+        .table-responsive {
+            min-height: .01%;
+            overflow-x: auto;
+        }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .table>thead>tr>th {
+            vertical-align: middle;
+            border-bottom: 1px solid #e5ebec;
+        }
+
+        .table>tbody>tr>td,
+        .table>tbody>tr>th,
+        .table>tfoot>tr>td,
+        .table>tfoot>tr>th,
+        .table>thead>tr>td,
+        .table>thead>tr>th {
+            padding: 10px 6px;
+            vertical-align: middle;
+        }
+
+        .table-bordered>tbody>tr>td,
+        .table-bordered>tbody>tr>th,
+        .table-bordered>tfoot>tr>td,
+        .table-bordered>tfoot>tr>th,
+        .table-bordered>thead>tr>td,
+        .table-bordered>thead>tr>th {
+            border: 1px solid #e5ebec;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid dashbd">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box printableArea" id="printableArea">
+                    <h3><b>INVOICE</b> <span class="pull-right">#{{data.invoiceNo}}</span></h3>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-left">
+                                <address>
+                                    <h5 class="p-l-5">From,</h5>
+                                    <h3 class="p-l-5"><b class="text-primary">Combyun Commerce Pvt. Ltd.</b></h3>
+                                    <p class="text-muted m-l-5">#WJV9+WJ5, 1st Cross Rd, <br>Koramangala 8th Block
+                                        <br>Koramangala, Bengaluru<br>Karnataka 560030</p>
+                                    <p><b>GSTIN :</b> </p>
+                                </address>
+                            </div>
+                            <div class="pull-right text-right">
+                                    <address>
+                                            <h5>To,</h5>
+                                            <h4 class="font-bold">{{data.customer.name}}</h4>
+                                            <p class="text-muted m-l-30">{{data.address.flatNo}},
+                                                {{data.address.tower}},<br/>
+                                                {{data.address.apartment}}<br/>
+                                           
+                                            <p class="m-t-30"><b>Invoice Date :</b> {{data.createdOn}}</p>
+                                    </address>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-12">
+                                <div class="table-responsive m-t-40">
+                                    <table class="table table-hover table-bordered table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th class="text-center">#</th>
+                                            <th>Product</th>
+                                            <th class="text-center">Campaign</th>
+                                            <th class="text-center">Quantity</th>
+                                            <th class="text-center">Unit Price</th>
+                                            <th class="text-right">Total</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each data.products}}
+                                                <tr>
+                                                    <td class="text-center">1</td>
+                                                    <td>{{this.name}}</td>
+                                                    <td class="text-center">{{this.campaign}}</td>
+                                                    <td class="text-center">{{this.quantity}}</td>
+                                                    <td class="text-center">{{this.price}}</td>
+                                                    <td class="text-right">&#8377; {{this.total}} </td>
+                                                </tr>
+                                            {{/each}}
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    
+                                   
+                                        <div class="pull-right m-t-30 text-right">
+                                        <p>Sub - Total amount: &#8377; {{data.txn.amount}}</p>
+                                         
+
+                                        <hr/>
+                                        <h3><b>Total :</b> &#8377; {{data.txn.amount}}</h3>
+                                        </div>
+                                   
+
+
+                                    <div class="clearfix"></div>
+                                    <hr class="no-print"/>
+                                    
+                                </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
