@@ -89,19 +89,11 @@ exports.update = (req, res, next) => {
   const ommitRole = req.locals.user.role !== 'admin' ? 'role' : '';
   let updatedUser = omit(req.body, ommitRole);
   //updatedUser = omit(req.body, 'email');
-  updatedUser = omit(req.body, 'mobile');
   const user = Object.assign(req.locals.user, updatedUser);
   user.save()
     .then(async (savedUser) => {
       let u = savedUser.transform()
-      for(let i = 0; i < u.address.length; i++) {
-        let address = u.address[i].toJSON();
-        let apartment = await Apartment.findOne({'name': u.address[i].apartment});
-        //console.log('apartment ', apartment._id)
-        address['apartmentId'] = apartment? apartment._id : 123;
-        u.address[i] = address;
-      }
-
+     
       res.json(u)
     })
     .catch((e) => next(e));

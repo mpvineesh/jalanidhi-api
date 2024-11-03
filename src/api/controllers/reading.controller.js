@@ -1,4 +1,5 @@
 const httpStatus = require("http-status");
+const mongoose = require('mongoose');
 const { omit } = require("lodash");
 const Reading = require("../models/reading.model");
 const APIError = require("../errors/api-error");
@@ -42,7 +43,7 @@ exports.get = (req, res) => res.json(req.locals.reading.transform());
  * @public
  */
 exports.create = async (req, res, next) => {
-  const exist = await Reading.findOne({ month: req.body.month, userId: req.body.userId});
+  const exist = await Reading.findOne({ month: req.body.month, userId: mongoose.Types.ObjectId(req.body.userId)});
   if (exist) {
     let e = new APIError({
       message: "Already added the reading",
