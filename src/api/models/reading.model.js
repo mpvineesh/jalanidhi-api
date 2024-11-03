@@ -71,7 +71,7 @@ readingSchema.virtual('user', {
 readingSchema.method({
   transform() {
     const transformed = {};
-    const fields = ['createdAt', 'value', 'charge', 'month', 'user'];
+    const fields = ['createdAt', 'value', 'charge', 'month', 'user', 'paymentStatus'];
 
     fields.forEach((field) => {
       transformed[field] = this[field];
