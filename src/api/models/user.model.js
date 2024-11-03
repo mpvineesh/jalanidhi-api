@@ -100,7 +100,7 @@ userSchema.pre('save', async function save(next) {
 userSchema.method({
   transform() {
     const transformed = {};
-    const fields = ['id', 'name', 'picture', 'role', 'createdAt', 'address', 'mobile', ];
+    const fields = ['id', 'name', 'picture', 'role', 'createdAt', 'address', 'mobile', 'status'];
     
     fields.forEach((field) => {
       transformed[field] = this[field];
